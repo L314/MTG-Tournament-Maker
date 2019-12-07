@@ -25,7 +25,17 @@ class Player:
         self.draws = 0
 
 
-player_number = int(input("Number of players? "))
+def get_number(prompt):
+    while True:
+        check = input(prompt)
+        try:
+            check = int(check)
+            return check
+        except ValueError:
+            print("That's not a number!")
+
+
+player_number = get_number("Number of players? ")
 players = []
 for n in range(player_number):
     players.append(Player())
@@ -59,7 +69,7 @@ for match in range(number_matches):
                     break
             print("Automatically Inputting for Pairing", current_input)
         else:
-            current_input = int(input("Please Enter Pairing Number "))
+            current_input = get_number("Please Enter Pairing Number ")
             if current_input in entered_pairings:
                 print("Bad user, enter an unentered pairing.")
                 continue
@@ -68,9 +78,9 @@ for match in range(number_matches):
                 continue
         entered_pairings.append(current_input)
         current_input -= 1
-        wins = int(input("Please input wins for " + players[pairings[current_input][0]].name + " "))
-        losses = int(input("Please input losses for " + players[pairings[current_input][0]].name + " "))
-        draws = int(input("Please input draws for " + players[pairings[current_input][0]].name + " "))
+        wins = get_number("Please input wins for " + players[pairings[current_input][0]].name + " ")
+        losses = get_number("Please input losses for " + players[pairings[current_input][0]].name + " ")
+        draws = get_number("Please input draws for " + players[pairings[current_input][0]].name + " ")
         players[pairings[current_input][0]].wins += wins
         players[pairings[current_input][0]].losses += losses
         players[pairings[current_input][0]].draws += draws
